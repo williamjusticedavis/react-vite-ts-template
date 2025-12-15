@@ -1,10 +1,11 @@
 import js from "@eslint/js";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
+import tseslint from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
+import prettier from "eslint-config-prettier";
 import importPlugin from "eslint-plugin-import";
 import jsxA11y from "eslint-plugin-jsx-a11y";
-import unusedImports from "eslint-plugin-unused-imports";
-import prettier from "eslint-config-prettier";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 
 export default [
   js.configs.recommended,
@@ -12,64 +13,58 @@ export default [
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
+      parser: tsParser,
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
         ecmaFeatures: { jsx: true },
       },
+      globals: {
+        __dirname: "readonly",
+        process: "readonly",
+        test: "readonly",
+        expect: "readonly",
+        describe: "readonly",
+        it: "readonly",
+        vi: "readonly",
+        window: "readonly",
+        document: "readonly",
+        localStorage: "readonly",
+        HTMLElement: "readonly",
+        HTMLButtonElement: "readonly",
+        HTMLInputElement: "readonly",
+        HTMLDivElement: "readonly",
+      },
     },
     plugins: {
+      "@typescript-eslint": tseslint,
       react,
       "react-hooks": reactHooks,
       import: importPlugin,
       "jsx-a11y": jsxA11y,
-      "unused-imports": unusedImports,
     },
     settings: {
       react: {
         version: "detect",
       },
-      "import/resolver": {
-        typescript: true,
-      },
     },
-    ignores: [
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/coverage/**",
-      "**/test/**",
-    ],
     rules: {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" },
+      ],
+
+      "func-style": ["error", "expression"],
+      "prefer-arrow-callback": "error",
+
       "react/react-in-jsx-scope": "off",
-      "react/jsx-uses-react": "off",
       "react/prop-types": "off",
 
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
 
-      "import/order": [
-        "error",
-        {
-          groups: [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-          ],
-          "newlines-between": "always",
-          alphabetize: { order: "asc", caseInsensitive: true },
-        },
-      ],
-
-      "unused-imports/no-unused-imports": "warn",
-      "no-unused-vars": "off",
-      "import/no-unassigned-import": "off",
-
       "jsx-a11y/anchor-is-valid": "warn",
-      "jsx-a11y/click-events-have-key-events": "warn",
-      "jsx-a11y/no-static-element-interactions": "warn",
 
       "no-console": ["warn", { allow: ["warn", "error"] }],
     },

@@ -1,8 +1,9 @@
+import { NavLink } from "react-router-dom";
+import { Moon, Sun } from "lucide-react";
+import { Button } from "../ui";
 import { useThemeContext } from "@/app/Theme-context";
 import { cn } from "@/lib/cn";
-import { NavLink } from "react-router-dom";
-import { Button } from "../ui";
-import { Moon, Sun } from "lucide-react";
+
 
 const Nav = () => {
   const { theme, toggle } = useThemeContext();

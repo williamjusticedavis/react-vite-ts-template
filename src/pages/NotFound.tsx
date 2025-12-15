@@ -1,5 +1,5 @@
-import { Button, Card } from "@/components/ui";
 import { Link } from "react-router-dom";
+import { Button, Card } from "@/components/ui";
 
 const NotFoundPage = () => {
   return (
