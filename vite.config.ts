@@ -32,6 +32,7 @@ export default defineConfig({
         "src/lib/constants.ts",
         "src/lib/env.ts",
         "src/types/**",
+        "dist/**",
       ],
     },
   },
