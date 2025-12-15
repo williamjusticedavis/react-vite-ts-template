@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@import "./styles/global.css";
+@custom-variant dark (&:where(.dark &, .dark *));
+
+/* 🔹 define tokens (this generates bg-bg, text-fg, etc.) */
+@theme {
+  --color-bg: #f9fafb;
+  --color-fg: #111827;
+  --color-card: #ffffff;
+  --color-muted: #6b7280;
+}
+
+/* 🔹 override tokens when html has .dark */
+:root.dark {
+  --color-bg: #030712;
+  --color-fg: #e5e7eb;
+  --color-card: #111827;
+  --color-muted: #9ca3af;
+}
